@@ -1,10 +1,17 @@
 var mongoose = require('mongoose')
 var mongoosePaginate = require('mongoose-paginate')
-var Movie = require('./movie.model')
 
+var MovieSchema = new mongoose.Schema({
+    mdb_id: String,
+    title: String,
+    poster_path: String,
+    overview: String,
+    release_date: String,
+    votes: Number
+})
 
 var PollSchema = new mongoose.Schema({
-    movies: [Movie]
+    movies: [MovieSchema]
 })
 
 PollSchema.plugin(mongoosePaginate)
