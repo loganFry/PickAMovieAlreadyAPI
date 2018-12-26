@@ -19,6 +19,8 @@ router.put('/', PollController.updatePoll)
 
 router.put('/:id/addMovie', PollController.addMovie)
 
+router.put('/:id/removeMovie', PollController.removeMovie)
+
 router.delete('/:id', PollController.removePoll)
 
 
