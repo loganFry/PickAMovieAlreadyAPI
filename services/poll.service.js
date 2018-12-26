@@ -101,3 +101,21 @@ exports.deletePoll = async function(id){
         throw Error("Error Occured while Deleting the Poll")
     }
 }
+
+exports.addMovie = async function(id, movie){
+    try{
+        //Find the existing poll by id
+        var poll = await Poll.findById(id);
+    }catch(e){
+        throw Error("Error occured while Finding the Poll")
+    }
+
+    poll.movies.push(movie);
+
+    try{
+        var savedPoll = await poll.save()
+        return savedPoll;
+    }catch(e){
+        throw Error("Error occured while adding the movie");
+    }
+}
