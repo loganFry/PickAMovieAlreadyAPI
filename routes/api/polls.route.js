@@ -11,6 +11,8 @@ var PollController = require('../../controllers/polls.controller');
 
 router.get('/', PollController.getPolls)
 
+router.get('/:id', PollController.getPoll)
+
 router.post('/', PollController.createPoll)
 
 router.put('/', PollController.updatePoll)

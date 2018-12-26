@@ -21,6 +21,17 @@ exports.getPolls = async function(req, res, next){
     }
 }
 
+exports.getPoll = async function(req, res, next){
+    var id = req.params.id;
+
+    try {
+        var poll = await PollService.getPoll(id);
+        return res.status(200).json({status: 200, data: poll, message: "Successfully retreived poll"})
+    } catch(e) {
+        return res.status(400).json({status: 400, message: e.message})
+    }
+}
+
 exports.createPoll = async function(req, res, next){
     // Req.Body contains the form submit values.
     var poll = {
