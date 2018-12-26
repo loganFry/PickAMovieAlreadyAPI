@@ -69,7 +69,7 @@ exports.updatePoll = async function(req, res, next){
 
 exports.addMovie = async function(req, res, next){
     var id = req.params.id
-    var movie = req.body.movie
+    var movie = req.body;
 
     try{
         var updatedPoll = await PollService.addMovie(id, movie)
