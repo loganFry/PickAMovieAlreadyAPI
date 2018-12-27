@@ -98,6 +98,18 @@ exports.removeMovie = async function(req, res, next){
     }
 }
 
+exports.voteForMovie = async function(req, res, next){
+    var pollId = req.params.id;
+    var movieId = req.body.movieId;
+
+    try {
+        var updatedPoll = await PollService.voteForMovie(pollId, movieId);
+        return res.status(200).json({status: 200, data: updatedPoll, message: "Successfully voted for movie"});
+    } catch(e) {
+        return res.status(400).json({status: 400, message: e.message});
+    }
+}
+
 exports.removePoll = async function(req, res, next){
     var id = req.params.id
 

@@ -110,3 +110,24 @@ exports.removeMovie = async function(pollId, movieId){
         throw Error("Error ocurred while removing the movie");
     }
 }
+
+exports.voteForMovie = async function(pollId, movieId){
+    try{
+        //Find the old poll by id
+        var oldPoll = await Poll.findById(pollId);
+    }catch(e){
+        throw Error("Error occured while finding the poll")
+    }
+
+    var movie = oldPoll.movies.find(x => x.id === movieId);
+    console.log(movieId)
+    console.log(oldPoll)
+    movie.votes++;
+
+    try {
+        var savedPoll = await oldPoll.save();
+        return savedPoll;
+    } catch(e) {
+        throw Error("Error ocurred while updating the vote count");
+    }
+}

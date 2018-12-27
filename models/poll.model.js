@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 var mongoosePaginate = require('mongoose-paginate')
 
 var MovieSchema = new mongoose.Schema({
-    id: String,
+    id: Number,
     title: String,
     poster_path: String,
     overview: String,
