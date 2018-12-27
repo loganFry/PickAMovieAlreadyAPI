@@ -70,7 +70,7 @@ exports.updatePoll = async function(req, res, next){
 exports.addMovie = async function(req, res, next){
     var id = req.params.id
     var movie = {
-        mdb_id: req.body.id,
+        id: req.body.id,
         title: req.body.title,
         poster_path: req.body.poster_path,
         overview: req.body.overview,

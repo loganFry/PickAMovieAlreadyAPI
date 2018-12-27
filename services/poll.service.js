@@ -104,7 +104,7 @@ exports.addMovie = async function(id, movie){
 
 exports.removeMovie = async function(pollId, movieId){
     try {
-        var modifiedPoll = await Poll.findByIdAndUpdate(pollId, {$pull : {movies: { mdb_id: movieId }}})
+        var modifiedPoll = await Poll.findByIdAndUpdate(pollId, {$pull : {movies: { id: movieId }}})
         return modifiedPoll;
     } catch(e) {
         throw Error("Error ocurred while removing the movie");
