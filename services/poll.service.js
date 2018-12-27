@@ -111,7 +111,7 @@ exports.removeMovie = async function(pollId, movieId){
     }
 }
 
-exports.voteForMovie = async function(pollId, movieId){
+exports.voteForMovie = async function(pollId, movieId, oldMovieId){
     try{
         //Find the old poll by id
         var oldPoll = await Poll.findById(pollId);
@@ -120,9 +120,12 @@ exports.voteForMovie = async function(pollId, movieId){
     }
 
     var movie = oldPoll.movies.find(x => x.id === movieId);
-    console.log(movieId)
-    console.log(oldPoll)
     movie.votes++;
+
+    if(oldMovieId){
+        var oldMovie = oldPoll.movies.find(x => x.id === oldMovieId);
+        oldMovie.votes--;
+    }
 
     try {
         var savedPoll = await oldPoll.save();
