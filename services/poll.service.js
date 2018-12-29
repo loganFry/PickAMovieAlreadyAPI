@@ -2,6 +2,15 @@
 
 var Poll = require('../models/poll.model')
 
+const Pusher = require('pusher');
+
+const pusher = new Pusher({
+  appId: process.env.PUSHER_APP_ID,
+  key: process.env.PUSHER_KEY,
+  secret: process.env.PUSHER_SECRET,
+  cluster: process.env.PUSHER_CLUSTER,
+});
+
 // Saving the context of this module inside the _the variable
 _this = this
 
@@ -129,6 +138,8 @@ exports.voteForMovie = async function(pollId, movieId, oldMovieId){
 
     try {
         var savedPoll = await oldPoll.save();
+        console.log(pusher);
+        pusher.trigger('polls', 'new-vote', {pollId: pollId, movieId: movieId, oldMovieId: oldMovieId});
         return savedPoll;
     } catch(e) {
         throw Error("Error ocurred while updating the vote count");
