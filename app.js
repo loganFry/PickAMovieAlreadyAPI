@@ -8,12 +8,17 @@ var cors = require('cors');
 
 
 var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
 // Get the API route ...
 
 var api = require('./routes/api.route')
 
 var app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 app.set('port', process.env.PORT);
 
