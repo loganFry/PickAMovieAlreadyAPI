@@ -55,9 +55,9 @@ app.use(function(err, req, res, next) {
 var bluebird = require('bluebird')
 var mongoose = require('mongoose')
 mongoose.Promise = bluebird
-mongoose.connect('mongodb://127.0.0.1:27017/PickAMovieAlready')
-.then(()=> { console.log(`Succesfully Connected to the Mongodb Database  at URL : mongodb://127.0.0.1:27017/PickAMovieAlready`)})
-.catch(()=> { console.log(`Error Connecting to the Mongodb Database at URL : mongodb://127.0.0.1:27017/PickAMovieAlready`)})
+mongoose.connect(process.env.DB_URL)
+.then(()=> { console.log(`Succesfully Connected to the Mongodb Database  at URL : ${process.env.DB_URL}`)})
+.catch(()=> { console.log(`Error Connecting to the Mongodb Database at URL : ${process.env.DB_URL}`)})
 
 
 module.exports = app;
