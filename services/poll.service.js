@@ -105,6 +105,7 @@ exports.addMovie = async function(id, movie){
 
     try{
         var savedPoll = await poll.save()
+        pusher.trigger('polls', 'add-movie', {pollId: id, movie: movie});
         return savedPoll;
     }catch(e){
         throw Error("Error occured while adding the movie");
@@ -114,6 +115,7 @@ exports.addMovie = async function(id, movie){
 exports.removeMovie = async function(pollId, movieId){
     try {
         var modifiedPoll = await Poll.findByIdAndUpdate(pollId, {$pull : {movies: { id: movieId }}})
+        pusher.trigger('polls', 'remove-movie', {pollId: pollId, movieId: movieId});
         return modifiedPoll;
     } catch(e) {
         throw Error("Error ocurred while removing the movie");
@@ -138,7 +140,6 @@ exports.voteForMovie = async function(pollId, movieId, oldMovieId){
 
     try {
         var savedPoll = await oldPoll.save();
-        console.log(pusher);
         pusher.trigger('polls', 'new-vote', {pollId: pollId, movieId: movieId, oldMovieId: oldMovieId});
         return savedPoll;
     } catch(e) {
