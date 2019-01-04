@@ -7,7 +7,8 @@ var MovieSchema = new mongoose.Schema({
     poster_path: String,
     overview: String,
     release_date: String,
-    votes: Number
+    votes: Number,
+    vote_average: Number
 })
 
 var PollSchema = new mongoose.Schema({

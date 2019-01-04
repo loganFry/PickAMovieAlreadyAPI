@@ -75,7 +75,8 @@ exports.addMovie = async function(req, res, next){
         poster_path: req.body.poster_path,
         overview: req.body.overview,
         release_date: req.body.release_date,
-        votes: req.body.votes
+        votes: req.body.votes,
+        vote_average: req.body.vote_average
     };
 
     try{

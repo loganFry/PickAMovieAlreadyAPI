@@ -115,7 +115,6 @@ exports.addMovie = async function(id, movie){
 exports.removeMovie = async function(pollId, movieId){
     try {
         var modifiedPoll = await Poll.findByIdAndUpdate(pollId, {$pull : {movies: { id: movieId }}})
-        pusher.trigger('polls', 'remove-movie', {pollId: pollId, movieId: movieId});
         return modifiedPoll;
     } catch(e) {
         throw Error("Error ocurred while removing the movie");
